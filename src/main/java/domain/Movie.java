@@ -22,6 +22,22 @@ public class Movie {
         playSchedules.add(playSchedule);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public List<PlaySchedule> getPlaySchedules() {
+        return playSchedules;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
