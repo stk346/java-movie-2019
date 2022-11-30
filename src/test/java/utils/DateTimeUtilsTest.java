@@ -1,10 +1,13 @@
 package utils;
 
+import domain.Movie;
+import domain.MovieRepository;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class DateTimeUtilsTest {
     @Test
@@ -36,4 +39,23 @@ public class DateTimeUtilsTest {
         LocalDateTime beforeDateTime = DateTimeUtils.createDateTime("2019-04-16 10:22");
         assertThat(DateTimeUtils.isOneHourWithinRange(dateTime, beforeDateTime)).isFalse();
     }
+
+    @Test
+    public void 영화_잘못선택하면_오류_발생하는지_테스트() {
+        int movieId = 9;
+        assertThatThrownBy(() -> {
+            MovieRepository.getMovie(movieId);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void 스케쥴_선택하면_capacity가_줄어드는지_테스트() {
+        Movie targetMovie = MovieRepository.getMovie(1);
+        int originalCapacity = targetMovie.getPlaySchedule(0).getCapacity();
+        targetMovie.selectMovieSchedule(0);
+        int afterSelectedScheduleCapacity = targetMovie.getPlaySchedule(0).getCapacity();
+        assertThat(originalCapacity).isEqualTo(afterSelectedScheduleCapacity+1);
+    }
+
+
 }

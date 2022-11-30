@@ -1,5 +1,6 @@
 package domain;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +19,18 @@ public class Movie {
         this.price = price;
     }
 
+    public LocalDateTime selectMovieSchedule(int idx) {
+        PlaySchedule selectedSchedule = playSchedules.get(idx);
+        playSchedules.get(idx).select();
+        return selectedSchedule.getStartDateTime();
+    }
+
     void addPlaySchedule(PlaySchedule playSchedule) {
         playSchedules.add(playSchedule);
+    }
+
+    public boolean isEmpty(int idx) {
+        return playSchedules.get(idx).isCapacityEmpty();
     }
 
     public int getId() {
@@ -36,6 +47,14 @@ public class Movie {
 
     public List<PlaySchedule> getPlaySchedules() {
         return playSchedules;
+    }
+
+    public PlaySchedule getPlaySchedule(int idx) throws IllegalArgumentException{
+        try {
+            return playSchedules.get(idx);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("올바른 값을 입력해주세요.");
+        }
     }
 
     @Override

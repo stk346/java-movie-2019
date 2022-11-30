@@ -15,5 +15,6 @@ public class MovieApplication {
         // TODO 구현 진행
         OutputView.printMovieSchedule(MovieRepository.getMovie(movieId));
 
+
     }
 }
