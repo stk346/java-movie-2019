@@ -73,6 +73,6 @@ public class DateTimeUtilsTest {
 
     @Test
     public void 오류테스트() {
-        System.out.println(MovieRepository.getMovie(2).getId());
+        System.out.println(MovieRepository.getMovie(2).getPlaySchedule(9));
     }
 }
