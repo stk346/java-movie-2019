@@ -1,5 +1,6 @@
 package view;
 
+import domain.AmountCalculator;
 import domain.Movie;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public class OutputView {
         System.out.println(movie);
     }
 
-
+    public static void showPrice(AmountCalculator amountCalculator) {
+        System.out.println("티켓 가격은 " + amountCalculator.showPrice() + "입니다.");
+    }
 }
 

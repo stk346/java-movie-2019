@@ -1,5 +1,6 @@
 import domain.Movie;
 import domain.MovieRepository;
+import domain.MovieTickets;
 import view.InputView;
 import view.OutputView;
 

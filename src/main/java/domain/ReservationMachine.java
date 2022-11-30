@@ -1,18 +1,25 @@
 package domain;
 
-import jdk.vm.ci.meta.Local;
 
 import java.time.LocalDateTime;
 
 public class ReservationMachine {
-    private MovieTickets movieTickets;
+    private final MovieTickets movieTickets;
 
     public ReservationMachine() {
         this.movieTickets = new MovieTickets();
     }
 
-    public void addMovieTicket(int id, String name, int price) {
-        movieTickets.addTicket(new MovieTicket(id, name, price));
+    public void generateTicketInfo(int id, String name, int price) {
+        if (!movieTickets.isMovieInfoExist(id)) {
+            movieTickets.addTicket(new MovieTicket(id, name, price));
+        }
+    }
+
+    public void buyTicket(int id, int idx) {
+        Movie targetMovie = MovieRepository.getMovie(id);
+        LocalDateTime selectedTime = targetMovie.selectMovieSchedule(idx);
+        movieTickets.getMovieTicket(id).addSchedule(selectedTime);
     }
 
     public void chooseSchedule(int id, int idx) {
@@ -26,5 +33,9 @@ public class ReservationMachine {
         if (targetMovie.isEmpty(idx)) {
             throw new IllegalArgumentException("좌석 수가 없습니다.");
         }
+    }
+
+    public AmountCalculator generateAmountCalculator() {
+        return new AmountCalculator(movieTickets);
     }
 }

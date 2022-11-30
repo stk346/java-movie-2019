@@ -50,6 +50,9 @@ public class MovieTicket {
         }
     }
 
+    public int getTotalAmount() {
+        return price * selectedSchedule.size();
+    }
 
     public int getId() {
         return id;

@@ -29,4 +29,21 @@ public class MovieTickets {
         }
         return null;
     }
+
+    public boolean isMovieInfoExist(int id) {
+        for (MovieTicket movieTicket : movieTickets) {
+            if (movieTicket.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getTotalAmount() {
+        int totalAmount = 0;
+        for (MovieTicket movieTicket : movieTickets) {
+            totalAmount += movieTicket.getTotalAmount();
+        }
+        return totalAmount;
+    }
 }
