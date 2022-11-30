@@ -39,11 +39,16 @@ public class MovieRepository {
         movies.add(movie4);
     }
 
-    public static List<Movie> getMovies() {
+    public static List<Movie> getMovie() {
         return movies;
     }
 
-    public static Movie getMovie(int idx) {
-        return movies.get(idx);
+    public static Movie getMovie(int id) {
+        for (int idx = 0; idx < movies.size(); idx++) {
+            if (movies.get(idx).getId() == id) {
+                return movies.get(idx);
+            }
+        }
+        return new Movie(-1, "영화정보없음", -1);
     }
 }

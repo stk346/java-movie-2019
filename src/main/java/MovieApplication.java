@@ -7,11 +7,13 @@ import java.util.List;
 
 public class MovieApplication {
     public static void main(String[] args) {
-        List<Movie> movies = MovieRepository.getMovies();
+        List<Movie> movies = MovieRepository.getMovie();
         OutputView.printMovies(movies);
 
         int movieId = InputView.inputMovieId();
 
         // TODO 구현 진행
+
+
     }
 }

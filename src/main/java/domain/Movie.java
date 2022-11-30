@@ -10,7 +10,7 @@ public class Movie {
     private final String name;
     private final int price;
 
-    private List<PlaySchedule> playSchedules = new ArrayList<>();
+    private final List<PlaySchedule> playSchedules = new ArrayList<>();
 
     public Movie(int id, String name, int price) {
         this.id = id;
@@ -36,6 +36,10 @@ public class Movie {
 
     public List<PlaySchedule> getPlaySchedules() {
         return playSchedules;
+    }
+
+    public PlaySchedule getPlaySchedule(int idx) {
+        return playSchedules.get(idx);
     }
 
     @Override
