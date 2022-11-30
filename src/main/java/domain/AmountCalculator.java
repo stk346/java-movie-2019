@@ -33,13 +33,13 @@ public class AmountCalculator {
         }
     }
 
-    public double discountCash(int amount) {
-        double discountAmount = amount * 0.02;
-        return amount - discountAmount;
+    public void discountCash() {
+        double discountAmount = ticketPrice * 0.02;
+        ticketPrice = ticketPrice - discountAmount;
     }
 
-    public double discountCard(int amount) {
-        double discountAMount = amount * 0.05;
-        return amount - discountAMount;
+    public void discountCard() {
+        double discountAMount = ticketPrice * 0.05;
+        ticketPrice =  ticketPrice - discountAMount;
     }
 }

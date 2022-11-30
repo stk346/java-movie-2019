@@ -33,4 +33,14 @@ public class InputView {
             throw new IllegalArgumentException("슷지민 입력해주세요.");
         }
     }
+
+    public static String inputToUseCashOrCard() {
+        System.out.println("현금과 카드 중 무엇으로 결제하시겠습니까? \n" +
+                            "현금, 카드를 입력해주세요.");
+        String userInput = scanner.nextLine();
+        if (!userInput.equals("현금") && !userInput.equals("카드")) {
+            throw new IllegalArgumentException("현금과 카드만 입력할 수 있습니다.");
+        }
+        return userInput;
+    }
 }

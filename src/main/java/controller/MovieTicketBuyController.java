@@ -71,4 +71,23 @@ public class MovieTicketBuyController {
             usePoint();
         }
     }
+
+    private String getUMethodOfPayment() {
+        try {
+            return InputView.inputToUseCashOrCard();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getUMethodOfPayment();
+        }
+    }
+
+    public void doDiscount() {
+        if (getUMethodOfPayment().equals("현금")) {
+            amountCalculator.discountCash();
+        }
+        if (getUMethodOfPayment().equals("카드")) {
+            amountCalculator.discountCard();
+        }
+        OutputView.showPrice(amountCalculator);
+    }
 }
