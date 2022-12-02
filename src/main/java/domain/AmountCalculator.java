@@ -7,11 +7,7 @@ public class AmountCalculator {
 
     public AmountCalculator(MovieTickets movieTickets) {
         this.movieTickets = movieTickets;
-    }
-
-    public int getTicketPrice() {
         this.ticketPrice = movieTickets.getTotalAmount();
-        return movieTickets.getTotalAmount();
     }
 
     public double showPrice() {
@@ -32,6 +28,7 @@ public class AmountCalculator {
             throw new IllegalArgumentException("포인트는 총 금액보다 작아야합니다.");
         }
     }
+
 
     public void discountCash() {
         double discountAmount = ticketPrice * 0.02;

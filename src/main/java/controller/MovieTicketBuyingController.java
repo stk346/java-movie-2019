@@ -7,18 +7,36 @@ import domain.ReservationMachine;
 import view.InputView;
 import view.OutputView;
 
-public class MovieTicketBuyController {
+import java.util.List;
+
+public class MovieTicketBuyingController {
 
     private final ReservationMachine reservationMachine;
     private AmountCalculator amountCalculator;
 
-    public MovieTicketBuyController() {
+    public MovieTicketBuyingController() {
         this.reservationMachine = new ReservationMachine();
     }
 
+    public void buyTicket() {
+        boolean continueBuyTicket = true;
+        while (continueBuyTicket) {
+            List<Movie> movies = MovieRepository.getMovies();
+            OutputView.printMovies(movies);
+            Movie selectedMovie = selectMovie();
+            OutputView.printMovieSchedule(selectedMovie);
+            selectSchedule(selectedMovie);
+            continueBuyTicket = InputView.isQuitBuyingTicket();
+        }
+        this.amountCalculator = reservationMachine.generateAmountCalculator();
+        OutputView.showPrice(amountCalculator);
+        usePoint();
+        doDiscount();
+    }
+
     public Movie selectMovie() {
-        int userInput = InputView.inputMovieId();
         try {
+            int userInput = InputView.inputMovieId();
             return MovieRepository.getMovie(userInput);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -26,40 +44,22 @@ public class MovieTicketBuyController {
         }
     }
 
-    public void selectSchedule(int id) {
+    public void selectSchedule(Movie movie) {
         int userInput = InputView.inputMovieSchedule();
-        Movie targetMovie = MovieRepository.getMovie(id);
+        Movie targetMovie = MovieRepository.getMovie(movie.getId());
         try {
             reservationMachine.generateTicketInfo(targetMovie.getId(), targetMovie.getName(), targetMovie.getPrice());
-            reservationMachine.buyTicket(id, userInput);
+            reservationMachine.buyTicket(movie.getId(), userInput);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            selectSchedule(id);
+            selectSchedule(movie);
         }
-    }
-
-    public void generateAmountCalculator() {
-        this.amountCalculator = reservationMachine.generateAmountCalculator();
-    }
-
-    public int showTicketPrice() {
-        return amountCalculator.getTicketPrice();
-    }
-
-    private String whetherUsePoint() {
-        try {
-            return InputView.whetherUsePoint();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return whetherUsePoint();
-        }
+        OutputView.printMovieSchedule(movie);
     }
 
     public void usePoint() {
-        if (whetherUsePoint().equals("O")) {
-            use();
-            OutputView.showPrice(amountCalculator);
-        }
+        use();
+        OutputView.showPrice(amountCalculator);
     }
 
     private void use() {
@@ -72,22 +72,22 @@ public class MovieTicketBuyController {
         }
     }
 
-    private String getUMethodOfPayment() {
+    private String getMethodOfPayment() {
         try {
             return InputView.inputToUseCashOrCard();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getUMethodOfPayment();
+            return getMethodOfPayment();
         }
     }
 
     public void doDiscount() {
-        if (getUMethodOfPayment().equals("현금")) {
+        if (getMethodOfPayment().equals("현금")) {
             amountCalculator.discountCash();
+            OutputView.showPrice(amountCalculator);
+            return;
         }
-        if (getUMethodOfPayment().equals("카드")) {
-            amountCalculator.discountCard();
-        }
+        amountCalculator.discountCard();
         OutputView.showPrice(amountCalculator);
     }
 }

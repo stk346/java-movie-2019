@@ -11,10 +11,6 @@ public class MovieTickets {
         movieTickets.add(movieTicket);
     }
 
-    public MovieTicket getMovieTicket(int idx) {
-        return movieTickets.get(idx);
-    }
-
     public MovieTicket getTicket(int id) {
         for (MovieTicket movieTicket : movieTickets) {
             MovieTicket movieTicket1 = getMovieTicket(id, movieTicket);

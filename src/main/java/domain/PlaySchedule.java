@@ -18,6 +18,10 @@ public class PlaySchedule {
     }
 
     public void select() {
+        if (capacity <= 0) {
+            System.out.println("예약가능인원이 다 찼습니다.");
+            return;
+        }
         capacity--;
     }
 

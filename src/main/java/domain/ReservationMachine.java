@@ -19,7 +19,7 @@ public class ReservationMachine {
     public void buyTicket(int id, int idx) {
         Movie targetMovie = MovieRepository.getMovie(id);
         LocalDateTime selectedTime = targetMovie.selectMovieSchedule(idx);
-        movieTickets.getMovieTicket(id).addSchedule(selectedTime);
+        movieTickets.getTicket(id).addSchedule(selectedTime);
     }
 
     public void chooseSchedule(int id, int idx) {

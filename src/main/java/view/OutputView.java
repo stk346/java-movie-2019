@@ -12,6 +12,10 @@ public class OutputView {
         }
     }
 
+    public static void printEnterScheduleMessage() {
+        System.out.println("시간을 선택해주세요.");
+    }
+
     public static void printMovieSchedule(Movie movie) {
         System.out.println(movie);
     }
