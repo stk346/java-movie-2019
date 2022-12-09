@@ -19,6 +19,15 @@ public class MovieTicket {
         return false;
     }
 
+    public SelectedMovie getMovie(int movieId) {
+        for (SelectedMovie selectedMovie : movies) {
+            if (selectedMovie.getId() == movieId) {
+                return selectedMovie;
+            }
+        }
+        throw new IllegalArgumentException("티켓에 해당 영화가 없습니다.");
+    }
+
     public List<SelectedMovie> getMovies() {
         return movies;
     }

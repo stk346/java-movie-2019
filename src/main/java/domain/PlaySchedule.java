@@ -20,6 +20,10 @@ public class PlaySchedule {
         capacity = capacity - selectedCapacity;
     }
 
+    public void increaseReservedCount(int count) {
+        capacity = capacity + count;
+    }
+
     public LocalDateTime getStartDateTime() {
         return startDateTime;
     }

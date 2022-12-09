@@ -33,7 +33,35 @@ public class InputView {
             return Integer.parseInt(userInput);
         } catch (IllegalArgumentException e) {
             System.out.println("숫자만 입력할 수 있습니다.");
-            return showEnterScheduleMessageAndGet();
+            return showEnterCapacityMessageAndGet();
         }
+    }
+
+    public static boolean ifContinueToReserveMessageAndGet() {
+        System.out.println("영화 예매를 계속하시겠습니까? (y, n으로 입력해주세요.)");
+        String userInput = scanner.nextLine();
+        if (!userInput.equals("y") && !userInput.equals("n")) {
+            throw new IllegalArgumentException("y, n으로 입력해주세요.");
+        }
+        if (userInput.equals("y")) {
+            return true;
+        }
+        return false;
+    }
+
+    public static double showUsePointMessageAndGet() {
+        System.out.println("얼마의 포인트를 사용하시겠습니까?");
+        String userInput = scanner.nextLine();
+        try {
+            return Integer.parseInt(userInput);
+        } catch (IllegalArgumentException e) {
+            System.out.println("숫자만 입력할 수 있습니다.");
+            return showUsePointMessageAndGet();
+        }
+    }
+
+    public static String askPaymentMethodAndGet() {
+        System.out.println("현금과 카드 중 무엇으로 결제하시겠습니까? (현금, 카드만 입력할 수 있습니다.)");
+        return scanner.nextLine();
     }
 }
