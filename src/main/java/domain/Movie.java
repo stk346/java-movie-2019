@@ -1,5 +1,8 @@
 package domain;
 
+import jdk.vm.ci.meta.Local;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +26,15 @@ public class Movie {
     }
 
     public PlaySchedule getPlaySchedule(int scheduleIdx) {
-        return playSchedules.get(scheduleIdx);
+        LocalDateTime targetTime = playSchedules.get(scheduleIdx).getStartDateTime();
+//        if (targetTime.isBefore(LocalDateTime.now())) {
+//            throw new IllegalArgumentException("상영중인 영화입니다.");
+//        }
+        try {
+            return playSchedules.get(scheduleIdx);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("올바른 스케줄을 선택해주세요.");
+        }
     }
 
     public int getId() {

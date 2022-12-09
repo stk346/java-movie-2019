@@ -1,5 +1,7 @@
 package domain;
 
+import utils.DateTimeUtils;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +17,14 @@ public class SelectedMovie {
         this.movie = new Movie(id, name, price);
     }
 
-    public void addPlaySchedule(PlaySchedule playSchedule) {
-        playSchedules.add(playSchedule);
-    }
-
-    public void printReservedInfo() {
-        StringBuilder sb = new StringBuilder();
-        for (PlaySchedule playSchedule : playSchedules) {
-            sb.append("시작시간: " + format(playSchedule.getStartDateTime()) + " 예약인원: " + playSchedule.getCapacity() + "\n");
+    public void addPlaySchedule(PlaySchedule playSchedule) throws IllegalArgumentException {
+        for (PlaySchedule Schedule : playSchedules) {
+            LocalDateTime existingSchedule = Schedule.getStartDateTime();
+            if (!DateTimeUtils.isOneHourWithinRange(existingSchedule, playSchedule.getStartDateTime())) {
+                throw new IllegalArgumentException("예매한 영화와 시간 차이가 1시간 이내입니다.");
+            }
         }
-        System.out.println(getId() + " - " + getName() + ", " + getPrice() + "원" + "\n");
-        System.out.println(sb);
+        playSchedules.add(playSchedule);
     }
 
     public int getReservedCount() {

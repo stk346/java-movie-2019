@@ -18,6 +18,9 @@ public class PriceCalculator {
     }
 
     public double usePoint(int ticketPrice, double point) {
+        if (point < 0 || point > ticketPrice) {
+            throw new IllegalArgumentException("올바른 포인트를 입력해주세요.");
+        }
         return ticketPrice - point;
     }
 

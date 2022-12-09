@@ -17,6 +17,9 @@ public class PlaySchedule {
         if (capacity - selectedCapacity < 0) {
             throw new IllegalArgumentException("예매 가능 인원을 초과했습니다.");
         }
+        if (selectedCapacity <= 0) {
+            throw new IllegalArgumentException("올바른 예매 인원을 입력해주세요.");
+        }
         capacity = capacity - selectedCapacity;
     }
 
