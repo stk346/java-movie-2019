@@ -29,7 +29,6 @@ public class AmountCalculator {
         }
     }
 
-
     public void discountCash() {
         double discountAmount = ticketPrice * 0.02;
         ticketPrice = ticketPrice - discountAmount;

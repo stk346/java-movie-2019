@@ -22,12 +22,6 @@ public class ReservationMachine {
         movieTickets.getTicket(id).addSchedule(selectedTime);
     }
 
-    public void chooseSchedule(int id, int idx) {
-        isTicketEmpty(id, idx);
-        LocalDateTime selectedSchedule = MovieRepository.getMovie(id).selectMovieSchedule(idx);
-        movieTickets.getTicket(id).addSchedule(selectedSchedule);
-    }
-
     private void isTicketEmpty(int id, int idx) {
         Movie targetMovie = MovieRepository.getMovie(id);
         if (targetMovie.isEmpty(idx)) {
